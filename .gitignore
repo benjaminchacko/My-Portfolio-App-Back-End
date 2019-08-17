@@ -23,3 +23,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
+validation/verifyToken.js
+api/validation/config.json
+api/validation/serviceAccountKey.json
+.gitignore
