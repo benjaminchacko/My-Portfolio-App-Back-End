@@ -27,7 +27,7 @@ const blogRoutes = require('./api/routes/blogs');
 const fireBaseRoute = require('./api/routes/fileUploader');
 const loginRoutes = require('./api/routes/login');
 const signupRoutes = require('./api/routes/signup');
-
+  
 // Routes that should handle requests
 app.use('/blogs', blogRoutes);
 app.use('/login', loginRoutes);
