@@ -1,0 +1,6 @@
+{
+  "verbose": true,
+  "ignore": ["node-modules"],
+  "watch": ["api", "app.js"],
+  "extensions": [".js", ".jsx", ".json"]
+}

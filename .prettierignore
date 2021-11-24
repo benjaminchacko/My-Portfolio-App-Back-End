@@ -1,0 +1,8 @@
+# Ignore artifacts:
+build
+coverage
+/node_modules
+.env
+validation/verifyToken.js
+api/validation/config.json
+api/validation/serviceAccountKey.json
