@@ -25,16 +25,6 @@ app.use((req, res, next) => {
 
 // Enviroment Variables
 dotenv.config();
-
-// Connect to DB
-mongoose.connect(process.env.DB_CONNECT, {
-    promiseLibrary: require('bluebird'),
-    useNewUrlParser: true,
-    useFindAndModify: false
-  })
-  .then(() => console.log('connection successful'))
-  .catch((err) => console.error(err));
-mongoose.Promise = global.Promise;
   
 // Routes that should handle requests
 app.use('/blogs', require('./api/routes/blogs'));
@@ -53,7 +43,7 @@ mongoose.connect(process.env.DB_CONNECTION, {
   .catch((err) => console.error(err));
 mongoose.Promise = global.Promise;
 
-const port = process.env.port || 3333;
+const port = process.env.port || 3000;
 const server = app.listen(port, () => {
   console.log(`Listening at http://localhost:${port}`);
 });
