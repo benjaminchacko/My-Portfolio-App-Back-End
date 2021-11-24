@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();s
+const router = express.Router();
 const Blog = require('../models/blog');
 
 // Post Route - Create New Blog Post
@@ -17,10 +17,10 @@ router.post('/', async (req, res) => {
 });
 
 // Get Route - Get All Blog Posts
-router.get('/:id', async (req, res) => {
+router.get('/', async (req, res) => {
   try {
-      const post = await Blog.findById(req.params.id);
-      res.send(post)
+      const data = await Blog.find().sort('title');
+      res.send(data);
   } catch (err) {
       res.json({ message: err })
   }
@@ -40,8 +40,10 @@ router.param('id', (req, res, next, id) => {
 
 // Get Route - Get Single Post with ID
 router.get('/:id', async (req, res) => {
+  const { id } = req.params;
+
   try {
-      const post = await Blog.findById(req.params.id);
+      const post = await Blog.findById(id);
       res.send(post)
   } catch (err) {
       res.json({ message: err })
