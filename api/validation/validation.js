@@ -1,5 +1,5 @@
 // Validation 
-let Joi = require('@hapi/joi');
+let Joi = require('joi');
 
 // Sign Up Validation
 let signupValidation = data => {  
