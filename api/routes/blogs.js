@@ -1,46 +1,32 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();s
 const Blog = require('../models/blog');
 
-router.post('/', (req, res, next) => {
-  const { body } = req;
+// Post Route - Create New Blog Post
+router.post('/', async (req, res) => {
+  const { body } = req; 
 
-  if(!body.title) {
-    return res.status(422).json({
-      errors: {
-        title: 'is required',
-      },
-    });
+  const post = new Blog(body); 
+
+  try {
+      const newPost = await post.save();
+      res.json(newPost);
+  } catch (err) {
+      res.json({ message: err });
   }
-
-  if(!body.author) {
-    return res.status(422).json({
-      errors: {
-        author: 'is required',
-      },
-    });
-  }
-
-  if(!body.body) {
-    return res.status(422).json({
-      errors: {
-        body: 'is required',
-      },
-    });
-  }
-
-  const finalBlog = new Blog(body);
-  return finalBlog.save()
-    .then(() => res.json({ blog: finalBlog.toJSON() }))
-    .catch(next);
 });
 
-router.get('/', (req, res, next) => {
-  return Blog.find()
-    .sort({ createdAt: 'descending' })
-    .then((blogs) => res.json({ blogs: blogs.map(blog => blog.toJSON()) }))
-    .catch(next);
-}); 
+// Get Route - Get All Blog Posts
+router.get('/:id', async (req, res) => {
+  try {
+      const post = await Blog.findById(req.params.id);
+      res.send(post)
+  } catch (err) {
+      res.json({ message: err })
+  }
+});
 
+// Get Route - Get Single Post with ID as parameter (deprecated, use the following route with /:id)
 router.param('id', (req, res, next, id) => {
   return Blog.findById(id, (err, blog) => {
     if(err) {
@@ -52,36 +38,43 @@ router.param('id', (req, res, next, id) => {
   }).catch(next);
 });
 
-router.get('/:id', (req, res, next) => {
-  return res.json({
-    blog: req.blog.toJSON(),
-  });
+// Get Route - Get Single Post with ID
+router.get('/:id', async (req, res) => {
+  try {
+      const post = await Blog.findById(req.params.id);
+      res.send(post)
+  } catch (err) {
+      res.json({ message: err })
+  }
 });
 
-router.patch('/:id', (req, res, next) => {
+// PATCH Route - Update Blog Post by Id
+router.patch('/:id', async (req, res) => {
   const { body } = req;
+  const { id } = req.params;
 
-  if(typeof body.title !== 'undefined') {
-    req.blog.title = body.title;
+  try {
+      const updatedPost = await Blog.updateOne(
+          { _id: id },
+          {
+              $set: body
+          })
+      res.json(updatedPost)
+  } catch (err) {
+      res.json({ message: err })
   }
-
-  if(typeof body.author !== 'undefined') {
-    req.blog.author = body.author;
-  }
-
-  if(typeof body.body !== 'undefined') {
-    req.blog.body = body.body;
-  }
-
-  return req.blog.save()
-    .then(() => res.json({ blog: req.blog.toJSON() }))
-    .catch(next);
 });
 
-router.delete('/:id', (req, res, next) => {
-  return Blog.findByIdAndRemove(req.blog._id)
-    .then(() => res.sendStatus(200))
-    .catch(next);
-});
+// DELETE Route - Delete Existing Blog Post by Id
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      let removePost = await Blog.deleteOne({ _id: id })
+      res.json(removePost)
+  } catch (err) {
+      res.json({ message: err })
+  }
+})
 
 module.exports = router;
