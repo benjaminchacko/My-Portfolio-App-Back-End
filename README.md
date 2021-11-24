@@ -14,7 +14,7 @@ In November 2021, I updated the project with some of my recent growth in knowled
 - added nodemon.json, .eslintrc.json & .prettierrc.json config files
 - destructuring id and body from request object in API routes
 - changing API routes to use the "async/await" and "try/catch" syntax from previous ".then" syntax
-- refactoring the project structure
+- refactored the project structure
 - further documentation of the project.
 
 Click [here](https://github.com/benjaminchacko/My-Portfolio-App-Front-End) to explore the React JS - Front End part of the project.
