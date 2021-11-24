@@ -32,14 +32,13 @@ app.use((req, res, next) => {
 // Enviroment Variables
 dotenv.config();
 
-// Routes that should handle requests
+// Routes to handle API requests
 app.use("/blogs", require("./api/routes/blogs"));
 app.use("/login", require("./api/routes/login"));
 app.use("/signup", require("./api/routes/signup"));
 app.use("/upload", require("./api/routes/fileUploader"));
 
 // MongoDB Connection
-
 mongoose
   // eslint-disable-next-line no-undef
   .connect(process.env.DB_CONNECTION, {
