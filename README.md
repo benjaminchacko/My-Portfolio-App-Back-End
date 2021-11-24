@@ -5,9 +5,11 @@
 ![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 ## Project Description
-This repository is the Express.js - backend part of my school portfolio app I built in 2019 after graduating from Bethel School of Technology with a Certificate in Web Development. In November 2021, I updated the project with some of my recent knowledge, including: 
+This repository is the Express.js - backend part of my school portfolio app I built in 2019 after graduating from Bethel School of Technology with a Certificate in Web Development. 
+
+In November 2021, I updated the project with some of my recent knowledge, including: 
 * destructuring id and body from request object in API routes 
-* changing routes to use the "async/await" and "try/catch" syntax from previous ".then" syntax
+* changing API routes to use the "async/await" and "try/catch" syntax from previous ".then" syntax
 * refactoring the project structure
 * further documentation of the project.
 
